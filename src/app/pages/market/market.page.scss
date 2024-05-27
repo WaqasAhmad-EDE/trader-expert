@@ -1,0 +1,115 @@
+.content-padding {
+  padding: 12px 24px;
+  margin: 0;
+  height: auto;
+}
+
+.grid-container {
+  padding: 16px 24px;
+}
+
+ion-card {
+  padding: 0;
+  margin: 4px 0;
+  height: auto;
+  border: 0.5px solid var(--ion-color-medium) !important;
+  border-radius: 12px;
+}
+
+ion-card-content {
+  padding: 10px 10px;
+}
+
+ion-card-title {
+  padding: 0;
+  margin: 12px 0;
+  color: var(--ion-color-medium);
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */
+{
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 3s linear infinite;
+  -moz-animation: rotating 3s linear infinite;
+  -ms-animation: rotating 3s linear infinite;
+  -o-animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
+}
+
+.up-icons {
+  margin: 0;
+  position: relative;
+  top: -6px;
+}
+
+.low-icons {
+  margin: 0;
+  position: relative;
+  top: 6px;
+  left: -13px;
+}
+
+
+.up-icons-s {
+  margin: 0;
+}
+
+.low-icons-s {
+  margin: 0;
+  position: relative;
+  top: 9px;
+  left: -9px;
+}
+
+.hiddendiv {
+  height: 1px;
+}
+
+@media only screen and (max-width: 360px) {
+  .large {
+    display: none;
+  }
+
+  .hiddendiv {
+    width: 50px;
+  }
+}
+
+@media only screen and (min-width: 361px) {
+  .small {
+    display: none;
+  }
+
+  .hiddendiv {
+    width: 75px;
+  }
+}

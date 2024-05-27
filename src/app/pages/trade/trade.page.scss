@@ -1,0 +1,113 @@
+.content-padding {
+  margin: 0;
+  padding: 24px;
+}
+
+ion-row {
+  display: flex;
+  justify-content: center;
+}
+
+ion-col {
+  padding: 0;
+  margin: auto 0;
+}
+
+ion-select {
+  padding: 0;
+  width: calc(100% + 12px);
+}
+
+ion-checkbox {
+  --size: 17px;
+  --background-checked: #15ec15;
+}
+
+ion-button {
+  text-transform: none;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid #15ec15;
+}
+
+igx-financial-chart {
+  --financial-toolbar-indicators-label-normal-color: white;
+  --financial-toolbar-background: var(--ion-card-background);
+  --financial-toolbar-dropdown-background-color: var(--ion-card-background);
+  --financial-toolbar-dropdown-text-color: white
+}
+
+.current-currency-pair-button {
+  margin: 0;
+  padding: 0;
+  color: var(--ion-color-white-main);
+  height: auto;
+}
+
+.current-currency-pair-button::part(native) {
+  padding: 0;
+}
+
+.arrow-down-icon {
+  height: 6px;
+  width: 10px;
+  margin: 0 12px 0;
+}
+
+.correct-item-layout {
+  --inner-padding-end: 0;
+  --padding-start: 0;
+}
+
+.big-simple-button {
+  margin: 0;
+  --padding-start: 44px;
+  --padding-end: 44px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  height: auto;
+}
+
+.bottom-content-cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-content-padding {
+  margin: 0;
+  padding: 24px 24px 24px 0;
+}
+
+.up-icons {
+  margin: 0;
+}
+
+.low-icons {
+  margin: 0;
+  position: relative;
+  top: 9px;
+  left: -13px;
+}
+
+ion-spinner {
+  width: 10px;
+  height: 10px;
+}
+ion-segment {
+  width: auto;
+  margin: 12px 0px;
+}
+ion-segment-button {
+  width: 50%;
+}

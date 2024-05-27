@@ -1,0 +1,82 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Tutorials</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+
+      <ion-col size="12" *ngFor="let video of  videoList">
+        <ion-card button (click)="modalVideo.present()">
+          <video style="width: 100%;max-width: 100%;" [src]="video.link"></video>
+          <ion-card-header>
+            <ion-card-title class="text-wrap-limit">{{video.title}}</ion-card-title>
+            <ion-card-subtitle class="text-wrap-limit">{{video.subtitle}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class="text-wrap-limit">
+            {{video.desp}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content> -->
+
+
+<!-- 
+<ion-modal #modalVideo
+  (didDismiss)="titleValue=null">
+  <ng-template>
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-buttons slot="primary">
+            <ion-button (click)="modalVideo.dismiss()">
+              <ion-icon name="close" slot="start"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content class="ion-padding">
+
+
+
+      <ion-card>
+        <video *ngIf="editVideo" autoplay style="width: 100%;max-width: 100%;" controls [src]="editVideo.link"></video>
+        <img *ngIf="!editVideo && !selectedVideo" (click)="inputfile.click();"
+          src="./../../../assets/images/upload-video.jpg" />
+        <img *ngIf="!editVideo && selectedVideo" (click)="inputfile.click();"
+          src="./../../../assets/images/upload-video-selected.jpg" />
+        <input #inputfile id="uploadVideo" style="display: none;" type="file" (change)="onChangeVideoSelect($event)">
+        <ion-card-content>
+          <div>
+            <ion-item color="undefined">
+              <ion-label position="floating">Title</ion-label>
+              <ion-input #title type="text" value="{{editVideo.title}}" readonly></ion-input>
+            </ion-item>
+            <ion-item color="undefined">
+              <ion-label position="floating">Subtitle</ion-label>
+              <ion-input #subtitle type="text" value="{{editVideo.subtitle}}" readonly></ion-input>
+            </ion-item>
+            <ion-item color="undefined">
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea #desp rows="5" type="text" readonly value="{{editVideo.desp}}"></ion-textarea>
+            </ion-item>
+
+          </div>
+
+        </ion-card-content>
+      </ion-card>
+
+
+    </ion-content>
+  </ng-template>
+</ion-modal> -->

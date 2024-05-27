@@ -1,0 +1,86 @@
+<ion-content>
+  <ion-item-group *ngIf="order" style="margin-top: 24px">
+    <ion-item lines="none">
+      <ion-icon class="up-icons" slot="start" size="large" [src]="'/assets/images/'+order.currencyPair.split('-')[0]+'.svg'"></ion-icon>
+      <ion-icon class="low-icons" slot="start" size="large" [src]="'/assets/images/'+order.currencyPair.split('-')[1]+'.svg'"></ion-icon>
+      <ion-label class="global-label-main-bold">{{ order.currencyPair }}</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="global-label-body">Opening Price</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end">{{ formatFixedPrice(order.openPrice, order.currencyPair) }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="order.active" lines="none">
+      <ion-label class="global-label-body">Current Price</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end">{{ formatFixedPrice(currentPrice, order.currencyPair) }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="!order.active" lines="none">
+      <ion-label class="global-label-body">Closing Price</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end">{{ formatFixedPrice(order.closePrice, order.currencyPair) }}</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="global-label-body">Amount</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end" color="primary">${{ order.amount }}</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="global-label-body">Leverage</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end">1:{{ order.leverage }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="order.takeProfitTarget" lines="none">
+      <ion-label class="global-label-body">Take Profit</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end">{{ formatFixedPrice(order.takeProfitTarget, order.currencyPair) }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="order.stopLossTarget" lines="none">
+      <ion-label class="global-label-body">Stop Loss</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end">{{ formatFixedPrice(order.stopLossTarget, order.currencyPair) }}</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="global-label-body">Direction</ion-label>
+      <ion-label
+        class="global-label-body-bold ion-text-end"
+        style="padding: 4px 12px; border-radius: 20px"
+        slot="end"
+        [style.background]="order.type === 'buy' ? 'var(--ion-color-green-light)' : 'var(--ion-color-red-light)'"
+        [color]="order.type === 'buy' ? 'primary' : 'danger'">
+        {{ order.type.toUpperCase() }}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="global-label-body">Change</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end" [color]="currentProfitPercentage < 0 ? 'danger' : 'success'">
+        {{ currentProfitPercentage.toFixed(3) }}%
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="global-label-body">Total</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end">${{ currentTotal.toFixed(3) }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="!order.active" lines="none">
+      <ion-label class="global-label-body">Closed At</ion-label>
+      <ion-label class="global-label-body-bold ion-text-end" slot="end">{{ order.closeDate.toDate() | date: "short" }}</ion-label>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-grid class="ion-no-padding" style="margin: 24px">
+    <ion-row *ngIf="!isMarketOpen && order.active">
+      <ion-col class="ion-text-center" size="12">
+        <ion-label class="global-label-callout-bold" color="danger">Market is closed</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="buttons-container ion-justify-content-center" *ngIf="order.active">
+      <ion-col class="ion-no-padding" size="6" style="max-width: 160px">
+        <ion-button class="global-label-callout-bold" color="primary" expand="block" fill="outline" (click)="onEditOrderButton()">Edit</ion-button>
+      </ion-col>
+      <ion-col class="ion-no-padding" size="6" style="max-width: 160px">
+        <ion-button
+          class="global-label-callout-bold"
+          color="danger"
+          expand="block"
+          fill="outline"
+          (click)="onCloseOrderButton()"
+          [disabled]="!isMarketOpen"
+          >Close</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

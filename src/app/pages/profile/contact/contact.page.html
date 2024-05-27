@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-item-group style="margin-top: 24px">
+    <ion-item>
+      <ion-icon src="/assets/custom-ion-icons/ic_call.svg" color="grey" style="font-size: 24px; margin-right: 8px"></ion-icon>
+      <ion-label>
+        <a href="tel:{{ contact?.phone }}" style="color: white">{{ contact?.phone }}</a>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon src="/assets/custom-ion-icons/ic_mail.svg" color="grey" style="font-size: 24px; margin-right: 8px"></ion-icon>
+      <ion-label>
+        <a href="mailto:{{ contact?.email }}" style="color: white">{{ contact?.email }}</a>
+      </ion-label>
+    </ion-item>
+  </ion-item-group>
+</ion-content>

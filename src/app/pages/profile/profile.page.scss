@@ -1,0 +1,65 @@
+.user-info-container {
+  margin: calc(env(safe-area-inset-top) + 12px) 24px 12px 0;
+}
+
+.user-name-label {
+  margin: 0 12px;
+  height: auto;
+}
+
+.balance-container {
+  margin: 24px;
+}
+
+.buttons-container {
+  margin: 0 24px 24px;
+}
+
+ion-card {
+  margin-inline: 6px !important;
+}
+
+ion-toolbar {
+  --min-height: 53px;
+  box-shadow: none;
+}
+
+.input_file {
+  display: none;
+}
+
+ion-row {
+  display: flex;
+  justify-content: center;
+}
+
+ion-col {
+  padding: 0;
+  margin: auto 0;
+}
+
+igx-financial-chart {
+  --financial-toolbar-background: var(--ion-card-background);
+}
+
+
+.up-icons {
+  margin: 0;
+  position: relative;
+  top: -6px;
+}
+
+.low-icons {
+  margin: 0;
+  position: relative;
+  top: 6px;
+  left: -13px;
+}
+
+ion-segment {
+  width: auto;
+  margin: 12px 0px;
+}
+ion-segment-button {
+  width: 50%;
+}

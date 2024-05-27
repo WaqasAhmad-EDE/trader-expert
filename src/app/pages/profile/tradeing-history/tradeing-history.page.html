@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Trading History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="(activeOrders | async)?.length > 0">
+    <ion-card-header>
+      <ion-card-title>Active Orders</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item
+          color="undefined"
+          *ngFor="let order of activeOrders | async"
+          [routerLink]="['/loggedin/trade/order-details', { id: order.id, active: true }]"
+          button>
+          <ion-label>
+            <ion-label>{{ order.currencyPair }}</ion-label>
+            <ion-label color="success"> ${{ order.amount }}</ion-label>
+          </ion-label>
+          <ion-label slot="end">
+            <ion-label>{{ formatFixedPrice(order.openPrice, order.currencyPair) }}</ion-label>
+            <ion-label [color]="order.type === 'buy' ? 'success' : 'danger'" class="ion-text-end">{{ order.type }}</ion-label>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="(closedOrders | async)?.length > 0">
+    <ion-card-header>
+      <ion-card-title>Closed Orders</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item
+          color="undefined"
+          *ngFor="let order of closedOrders | async"
+          [routerLink]="['/loggedin/trade/order-details', { id: order.id, active: false }]"
+          button>
+          <ion-label>
+            <ion-label>{{ order.currencyPair }}</ion-label>
+            <ion-label color="success"> ${{ order.amount }}</ion-label>
+          </ion-label>
+          <ion-label slot="end">
+            <ion-label>{{ formatFixedPrice(order.openPrice, order.currencyPair) }}</ion-label>
+            <ion-label [color]="order.type === 'buy' ? 'success' : 'danger'" class="ion-text-end">{{ order.type }}</ion-label>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

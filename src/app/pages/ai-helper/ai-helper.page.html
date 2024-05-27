@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ai-Helper</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+
+  <ng-container *ngFor="let not of aiHelperService?.allNotifications; index as i">
+
+
+    <ion-item-divider *ngIf=" i === 0 && lastRead !== 0" class="ion-justify-content-center">
+      <ion-label>New Messages </ion-label>
+    </ion-item-divider>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="success" class="ion-text-center">{{not?.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="ion-text-center">
+        {{not?.body}}
+      </ion-card-content>
+    </ion-card>
+
+    <ion-item-divider *ngIf="i === lastRead - 1 && lastRead !== 0 && aiHelperService?.allNotifications?.length !== lastRead" class="ion-justify-content-center">
+      <ion-label>Old Messages </ion-label>
+    </ion-item-divider>
+  </ng-container>
+
+
+
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title>Maintaince Break</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Due to maintaince break. Trading will be disabled from 12:00 AM to 03:00 AM.
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Balance Updated</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Your request for balance refill is completed. You can check your updated balance.
+    </ion-card-content>
+  </ion-card> -->
+
+
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title>Welcome</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Your joureny to the new work is started. Start trading and earn money in no time.
+    </ion-card-content>
+  </ion-card> -->
+</ion-content>

@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding" [fixed]="true">
+    <ion-row class="ion-no-padding ion-no-margin" style="padding: 24px">
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-label class="global-label-body-bold" style="width: 100%; display: flex; justify-content: center">Edit
+          profile</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-padding ion-no-margin" style="padding: 0 24px 24px">
+      <ion-col class="ion-justify-content-center ion-no-padding ion-no-margin">
+        <div class="avatar-container">
+          <ion-avatar class="avatar" (click)="inputfile.click();">
+            <img [src]="photoURL" />
+            <img style="position: absolute;left: 0;" src="assets/images/dpbg.png" />
+            <div class="dpedittext" for="logo">Edit</div>
+          </ion-avatar>
+          <input #inputfile (change)="onChangeDisplayImage($event)" accept="image/png, image/jpeg" class="input_file" id="logo"
+            style="display: none" type="file" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input class="global-label-body" [(ngModel)]="displayName" type="email"
+            (change)="onChangedDisplayName()"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item-group style="margin: 36px 0 0">
+    <ion-card>
+      <ion-card-content class="ion-no-padding">
+        <ion-item (click)="onContact()" lines="none" color="none">
+          <ion-icon name="help-circle-outline" color="grey" slot="start"></ion-icon>
+          <ion-label class="global-label-subHeadline" style="margin: 16px 0">Contact Support</ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="ion-no-padding">
+        <ion-item (click)="onDeleteAccount()" lines="none" color="none">
+          <ion-icon name="trash-outline" color="grey" slot="start"></ion-icon>
+          <ion-label class="global-label-subHeadline" style="margin: 16px 0">Delete my account</ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="ion-no-padding">
+        <ion-item (click)="logout()" lines="none" color="none">
+          <ion-icon name="log-out-outline" slot="start" color="danger"></ion-icon>
+          <ion-label class="global-label-subHeadline" style="margin: 16px 0" color="danger">Log Out</ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-item-group>
+</ion-content>

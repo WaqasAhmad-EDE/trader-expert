@@ -1,0 +1,17 @@
+.text-wrap-limit {
+    display: block;
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+ion-segment {
+    width: auto;
+    margin: 12px 0px;
+  }
+  ion-segment-button {
+    width: 50%;
+  }

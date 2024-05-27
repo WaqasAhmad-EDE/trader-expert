@@ -1,0 +1,29 @@
+<ion-tabs>
+  <ion-tab-bar id="app-tab-bar" slot="bottom">
+    <ion-tab-button tab="market">
+      <ion-icon src="/assets/tabs/ic_tab_market.svg"></ion-icon>
+      <ion-label>Market</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="trade">
+      <ion-icon src="/assets/tabs/ic_tab_trade.svg"></ion-icon>
+      <ion-label>Trade</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon src="/assets/tabs/ic_tab_profile.svg"></ion-icon>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button tab="videos">
+      <ion-icon name="logo-youtube"></ion-icon>
+      <ion-label>Videos</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button tab="ai-helper">
+      <ion-badge *ngIf="aiHelperService?.unreads" id="notifications-badge" color="danger">{{aiHelperService?.unreads}}</ion-badge>
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-label>AI Helper</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

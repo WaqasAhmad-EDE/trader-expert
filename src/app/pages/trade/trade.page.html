@@ -1,0 +1,259 @@
+<ion-header class="no-border" [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Trade</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #mainContent [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Trade</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--  *ngIf="(activeOrders | async)?.length > 0"-->
+  <ion-segment mode="md" [(ngModel)]="segment" [scrollable]="true" value="order" class="ion-justify-content-center">
+    <ion-segment-button value="order">Order</ion-segment-button>
+    <ion-segment-button value="active-orders">Active orders</ion-segment-button>
+  </ion-segment>
+
+  <div>
+    <div [hidden]="segment !== 'order'">
+      <ion-grid class="content-padding">
+        <ion-row class="ion-justify-content-start" style="margin-bottom: 24px">
+          <ion-col size="auto">
+            <ion-icon class="up-icons" aria-hidden="true"
+              [src]="'/assets/images/'+(currentCurrencyPair?.split('-')[0] || 'EUR')+'.svg'"></ion-icon>
+            <ion-icon class="low-icons" style="left: -8px;" aria-hidden="true"
+              [src]="'/assets/images/'+(currentCurrencyPair?.split('-')[1] || 'USD')+'.svg'"></ion-icon>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-button class="global-label-subHeadline current-currency-pair-button"
+              (click)="isOpenCurrencyPairsModal = true" expand="block" fill="clear">
+              {{ currentCurrencyPair ?? "Currency Pair" }}
+              <ion-icon class="arrow-down-icon" color="grey" slot="end"
+                src="/assets/custom-ion-icons/ic_arrow_down.svg"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="auto" style="margin-left: auto;">
+            <div>
+              <ion-label class="global-label-secondary-bold ion-no-margin ion-no-padding" color="primary" slot="end">
+                ${{ balance.toFixed(3) }}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row class="ion-justify-content-start">
+          <ion-col size="auto">
+            <ion-button class="global-label-subHeadline current-currency-pair-button"
+              (click)="isOpenIntervalModal = true" expand="block" fill="clear">
+              {{ intervalNames[currentInterval] ?? "Interval" }}
+              <ion-icon class="arrow-down-icon" color="grey" slot="end"
+                src="/assets/custom-ion-icons/ic_arrow_down.svg"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row> -->
+        <!-- <ion-row class="ion-justify-content-between ion-margin-top">
+          <ion-col size="6">
+            <ion-button style="--border-radius: 12px;max-width: 250px;" color="light"
+              (click)="isOpenIndicatorsModal= true" expand="block" fill="outline">
+              <ion-icon slot="start" src="/assets/images/Union.svg"></ion-icon>
+              Indicators <ion-chip color="success" slot="end"
+                *ngIf="getActiveIndicatiors()">{{getActiveIndicatiors()}}</ion-chip>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button style="--border-radius: 12px;max-width: 250px;" color="light"
+              (click)="isOpenChartTypeModal = true" expand="block" fill="outline">
+              <ion-icon slot="start" src="/assets/images/chartType_{{getChartName()?.key}}.svg"></ion-icon>
+              {{getChartName()?.key}} graph
+            </ion-button>
+          </ion-col>
+          <ion-col size="6"></ion-col>
+        </ion-row> -->
+      </ion-grid>
+
+      <div style="padding: 0; border-radius: 15px">
+        <div>
+          <app-chart
+            [CurPair]="(currentCurrencyPair?.split('-')[0] + currentCurrencyPair?.split('-')[1]) || 'EURUSD'"></app-chart>
+        </div>
+      </div>
+
+
+      <div style="position: relative">
+        <ion-item-group id="bottom-content" class="bottom-content bottom-content-padding"
+          [style.opacity]="isMarketOpen ? 1 : 0.4">
+          <ion-item class="correct-item-layout" style="margin-bottom: 16px">
+            <ion-input class="global-label-body ion-no-padding" [(ngModel)]="targetAmount" placeholder="Amount"
+              type="number" (ionFocus)="InputFocused($event)"  (ionBlur)="InputBlur($event)"  ></ion-input>
+            <ion-label class="global-label-body">$</ion-label>
+          </ion-item>
+
+          <ion-item class="correct-item-layout" lines="none" [style.margin-bottom]="showAutoCloseFields ? '16px' : '0'">
+            <ion-label class="global-label-body">Auto Close</ion-label>
+            <ion-toggle [(ngModel)]="showAutoCloseFields" slot="end">Auto close</ion-toggle>
+          </ion-item>
+
+          <ion-item class="correct-item-layout" [hidden]="!showAutoCloseFields" style="margin-bottom: 16px">
+            <ion-input class="global-label-body" [(ngModel)]="takeProfitTarget" placeholder="Take Profit"
+              type="number"   (ionFocus)="InputFocused($event)"  (ionBlur)="InputBlur($event)" ></ion-input>
+          </ion-item>
+
+          <ion-item class="correct-item-layout" [hidden]="!showAutoCloseFields">
+            <ion-input #input3  class="global-label-body" [(ngModel)]="stopLossTarget" placeholder="Stop Loss"
+              type="number"   (ionFocus)="InputFocused($event)"  (ionBlur)="InputBlur($event)" ></ion-input>
+          </ion-item>
+
+          <ion-item class="correct-item-layout" lines="none" style="margin: 16px 0 24px">
+            <ion-text class="global-label-body-bold">{{ formatFixedPrice(currentCurrency.ask, currentCurrencyPair)
+              }}</ion-text>
+            <ion-button class="big-simple-button global-label-callout" (click)="buy()" [disabled]="!canBuy"
+              color="primary" fill="outline" slot="end">
+              <ion-spinner *ngIf="isBuying" color="success"></ion-spinner>
+              {{isBuying ? '' :'Buy'}}
+
+            </ion-button>
+          </ion-item>
+
+          <ion-item class="correct-item-layout" lines="none">
+            <ion-text class="global-label-body-bold">{{ formatFixedPrice(currentCurrency.bid, currentCurrencyPair)
+              }}</ion-text>
+            <ion-button class="big-simple-button global-label-callout" (click)="sell()" [disabled]="!canSell"
+              color="danger" fill="outline" slot="end">
+              <ion-spinner *ngIf="isSelling" color="success"></ion-spinner>
+              {{isSelling ? '' : 'Sell'}}
+            </ion-button>
+          </ion-item>
+        </ion-item-group>
+
+        <ion-item class="bottom-content bottom-content-cover correct-item-layout ion-no-margin ion-text-center"
+          lines="none" style="--ion-background-color: transparent" *ngIf="!isMarketOpen">
+          <ion-label class="global-label-body-bold" color="danger" position="stacked" style="margin: 0">Market is closed
+            now. </ion-label>
+          <ion-label class="global-label-body-bold" color="primary" position="stacked" style="margin: 0">Opens in 12
+            hours </ion-label>
+        </ion-item>
+      </div>
+      <div [style.height]="keyboardHeight" [style.width]="'100%'"></div>
+    </div>
+
+    <div [hidden]="segment !== 'active-orders'">
+      <!--      *ngIf="(activeOrders | async)?.length > 0"-->
+      <ion-grid fixed style="padding: 0; margin-top: 24px">
+        <ion-row *ngFor="let order of activeOrders | async" (click)="onOrderDetails(order.id)"
+          style="margin: 0 24px 8px">
+          <ion-col>
+            <ion-card style="margin: 0">
+              <ion-card-content style="padding: 16px 24px">
+                <ion-grid style="padding: 0">
+                  <ion-row style="margin: 0 0 8px">
+                    <ion-col *ngIf="currentCurrencyPair">
+                      <ion-icon class="up-icons" size="large"
+                        [src]="'/assets/images/'+order.currencyPair?.split('-')[0]+'.svg'"></ion-icon>
+                      <ion-icon class="low-icons" size="large" style="left: -15px;"
+                        [src]="'/assets/images/'+order.currencyPair?.split('-')[1]+'.svg'"></ion-icon>
+                      <ion-label class="global-label-subHeadline">{{ order.currencyPair }}</ion-label>
+                    </ion-col>
+                    <ion-col class="ion-text-end">
+                      <ion-label class="global-label-subHeadline">{{ formatFixedPrice(order.openPrice,
+                        order.currencyPair) }}</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row style="margin: 0">
+                    <ion-col>
+                      <ion-label class="global-label-subHeadline" color="primary">$ {{ order.amount }}</ion-label>
+                    </ion-col>
+                    <ion-col class="ion-text-end">
+                      <ion-label class="global-label-caption-bold" style="padding: 4px 12px; border-radius: 20px"
+                        [style.background]="order.type === 'buy' ? 'var(--ion-color-green-light)' : 'var(--ion-color-red-light)'"
+                        [color]="order.type === 'buy' ? 'primary' : 'danger'">
+                        {{ order.type.toUpperCase() }}
+                      </ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>
+
+<!--Modal Currency Pairs-->
+<ion-modal #openModalCurrencyPairs mode="ios" (didDismiss)="isOpenCurrencyPairsModal = false"
+  [isOpen]="isOpenCurrencyPairsModal" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5, 0.75, 0.95]">
+  <ng-template>
+    <ion-content>
+      <ion-list style="margin-top: 16px">
+        <ion-item *ngFor="let currencyPair of availableCurrencyPairs" style="--inner-padding-end: 24px !important"
+          (click)="changeCurrencyStream(currencyPair, currentInterval)">
+          <ion-icon class="up-icons" aria-hidden="true" [src]="'/assets/images/'+currencyPair?.split('-')[0]+'.svg'"
+            slot="start"></ion-icon>
+          <ion-icon class="low-icons" aria-hidden="true" [src]="'/assets/images/'+currencyPair?.split('-')[1]+'.svg'"
+            slot="start"></ion-icon>
+          <ion-label class="global-label-body">{{ currencyPair }}</ion-label>
+          <ion-icon src="/assets/custom-ion-icons/ic_checkmark.svg" color="primary"
+            [hidden]="currencyPair !== currentCurrencyPair"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!--Modal Interval-->
+<ion-modal #openModalInterval mode="ios" (didDismiss)="isOpenIntervalModal = false" [isOpen]="isOpenIntervalModal"
+  [initialBreakpoint]="0.4" [breakpoints]="[0, 0.4, 0.75, 0.95]">
+  <ng-template>
+    <ion-content>
+      <ion-list style="margin-top: 16px">
+        <ion-item *ngFor="let interval of intervals" style="--inner-padding-end: 24px"
+          (click)="changeCurrencyStream(currentCurrencyPair, interval)">
+          <ion-label class="global-label-body">{{ interval }}</ion-label>
+          <ion-icon src="/assets/custom-ion-icons/ic_checkmark.svg" color="primary"
+            [hidden]="interval !== currentInterval"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!--Modal Indicators-->
+<ion-modal #openModalIndicators mode="ios" (didDismiss)="isOpenIndicatorsModal = false" [isOpen]="isOpenIndicatorsModal"
+  [initialBreakpoint]="0.4" [breakpoints]="[0, 0.4, 0.75, 0.95]">
+  <ng-template>
+    <ion-content>
+      <ion-list style="margin-top: 16px" *ngFor="let Indicator of Indicators; index as i">
+        <ion-list-header>
+          <ion-label>{{ Indicator.key }}</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let element of Indicator.value" style="--inner-padding-end: 24px;cursor: pointer;"
+          (click)="setIndicator(i, Indicators, element)">
+          <ion-label class="global-label-body">{{ element.key }}</ion-label>
+          <ion-icon src="/assets/custom-ion-icons/ic_checkmark.svg" color="primary"
+            [hidden]="!element.value"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!--Modal ChartType-->
+<ion-modal #openModalChartType mode="ios"
+  [initialBreakpoint]="0.4" [breakpoints]="[0, 0.4, 0.75, 0.95]">
+  <ng-template>
+    <ion-content>
+      <ion-list style="margin-top: 16px">
+        <ion-item *ngFor="let element of chartType;index as i" style="--inner-padding-end: 24px;cursor: pointer;"
+          (click)="setChartType(chartType, element)">
+          <ion-icon slot="start" src="/assets/images/chartType_{{element.key}}.svg"></ion-icon>
+          <ion-label class="global-label-body">{{ element.key }}</ion-label>
+          <ion-icon src="/assets/custom-ion-icons/ic_checkmark.svg" color="primary"
+            [hidden]="!element.value"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

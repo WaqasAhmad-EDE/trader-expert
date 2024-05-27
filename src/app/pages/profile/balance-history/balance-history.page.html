@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Balance History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <igx-financial-chart
+        height="350px"
+        width="100%"
+        [dataSource]="balanceHistory | async"
+        isToolbarVisible="false"
+        yAxisLabelLocation="OutsideRight"
+        yAxisMode="Numeric"
+        yAxisTitleLeftMargin="0"
+        yAxisTitleRightMargin="0"
+        yAxisLabelLeftMargin="0"
+        plotAreaMarginLeft="0"
+        yAxisLabelRightMargin="10"
+        yAxisLabelLeftMargin="10"
+        zoomSliderType="None">
+      </igx-financial-chart>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

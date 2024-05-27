@@ -1,0 +1,45 @@
+ion-input {
+  //caret-color: "primary";
+}
+
+ion-button {
+  --padding-start: 44px;
+  --padding-end: 44px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  height: auto;
+}
+
+ion-item {
+  --padding-start: 24px;
+  --padding-end: 24px;
+}
+
+.show-hide-button {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  height: auto;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top:0;
+  z-index: 2;
+}
+
+.underline-text {
+  text-decoration: underline;
+  display: inline-block;
+}
+
+.spacer {
+  height: 24px;
+}
+
+.container-center {
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+}

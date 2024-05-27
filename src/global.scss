@@ -10,28 +10,198 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* OVERRIDE DEFAULT ELEMENTS */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+.md ion-toolbar {
+  --background: var(--ion-background-color);
+}
+
+.md .header-md::after {
+  height: 0;
+}
+
+/* TITLE */
+ion-title {
+  padding: 12px 24px;
+  margin: 0;
+  height: auto;
+}
+
+.md ion-title {
+  @extend .global-label-main-bold !optional;
+}
+
+/* Segment control */
+ion-segment {
+  margin: 12px 48px;
+}
+
+/* ITEM */
+
+ion-item::part(native) {
+  --padding-start: 24px;
+}
+
+/* FONTS */
+
+.global-label-large {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 34px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 41px !important;
+}
+
+.global-label-large-bold {
+  @extend .global-label-large !optional;
+  font-weight: 600 !important;
+}
+
+.global-label-main {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 28px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 34px !important;
+}
+
+.global-label-main-bold {
+  @extend .global-label-main;
+  font-weight: 600 !important;
+}
+
+.global-label-secondary {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 22px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+}
+
+.global-label-secondary-bold {
+  @extend .global-label-secondary;
+  font-weight: 600 !important;
+}
+
+.global-label-tertiary {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 25px !important;
+}
+
+.global-label-tertiary-bold {
+  @extend .global-label-tertiary !optional;
+  font-weight: 600 !important;
+}
+
+.global-label-headline {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 17px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: 22px !important;
+  letter-spacing: -0.408px !important;
+}
+
+.global-label-headline-bold {
+  @extend .global-label-headline !optional;
+  font-weight: 600 !important;
+}
+
+.global-label-body {
+  font-feature-settings: 'case' on !important;
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 17px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 22px !important;
+}
+
+.global-label-body-bold {
+  @extend .global-label-body;
+  font-weight: 600 !important;
+}
+
+.global-label-callout {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 21px !important;
+}
+
+.global-label-callout-bold {
+  @extend .global-label-callout !optional;
+  font-weight: 600 !important;
+}
+
+.global-label-subHeadline {
+  font-feature-settings: 'case' on !important;
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 15px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+}
+
+.global-label-subHeadline-bold {
+  @extend .global-label-subHeadline !optional;
+  font-weight: 600 !important;
+}
+
+.global-label-footnote {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 13px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+}
+
+.global-label-subHeadline-bold {
+  @extend .global-label-subHeadline !optional;
+  font-weight: 600 !important;
+}
+
+.global-label-caption {
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 16px !important;
+}
+
+.global-label-caption-bold {
+  @extend .global-label-caption !optional;
+  font-weight: 600 !important;
+}
+
+.global-label-caption-secondary {
+  font-feature-settings: 'case' on !important;
+  font-family: -apple-system, "system-ui", "Helvetica Neue", Roboto, sans-serif;
+  font-size: 11px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 13px !important;
+}
+
+.global-label-caption-secondary-bold {
+  @extend .global-label-caption-secondary !optional;
+  font-weight: 600 !important;
+}

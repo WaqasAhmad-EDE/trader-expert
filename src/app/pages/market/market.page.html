@@ -1,0 +1,58 @@
+<ion-header [hidden]="loading" translucent="true">
+  <ion-toolbar>
+    <ion-title>Today Highlights</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [hidden]="loading">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Today Highlights</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-label>
+    <div class="global-label-tertiary content-padding">Currencies</div>
+  </ion-label>
+
+  <ion-grid class="grid-container" [fixed]="true">
+    <ion-row class="ion-justify-content-between" style="padding: 0 16px;padding-left: 0;">
+      <ion-col size="auto">
+        <div class="hiddendiv"></div>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-card-title class="global-label-caption">Name</ion-card-title>
+      </ion-col>
+      <ion-col size="3">
+        <ion-card-title class="global-label-caption ion-text-end">Ask Price</ion-card-title>
+      </ion-col>
+      <ion-col size="3">
+        <ion-card-title class="global-label-caption ion-text-end">Bid Price</ion-card-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-card *ngFor="let currencyPair of this.currencyPairs | async">
+      <ion-card-content>
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="auto" class="small">
+            <ion-icon class="up-icons-s" [src]="'/assets/images/'+currencyPair.name.split('-')[0]+'.svg'"></ion-icon>
+            <ion-icon class="low-icons-s" [src]="'/assets/images/'+currencyPair.name.split('-')[1]+'.svg'"></ion-icon>
+          </ion-col>
+          <ion-col size="auto" class="large">
+            <ion-icon class="up-icons" size="large" [src]="'/assets/images/'+currencyPair.name.split('-')[0]+'.svg'"></ion-icon>
+            <ion-icon class="low-icons" size="large" [src]="'/assets/images/'+currencyPair.name.split('-')[1]+'.svg'"></ion-icon>
+          </ion-col>
+          <ion-col  size="auto" class="global-label-subHeadline  ion-align-self-center">
+            {{ currencyPair.name }}</ion-col>
+          <ion-col size="3" class="global-label-subHeadline ion-text-end ion-align-self-center">{{ formatFixedPrice(currencyPair.ask, currencyPair.name) }}</ion-col>
+          <ion-col size="3" class="global-label-subHeadline ion-text-end ion-align-self-center">{{ formatFixedPrice(currencyPair.bid, currencyPair.name) }}</ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+</ion-content>
+
+<ion-content [hidden]="!loading">
+  <img alt="" class="rotating" src="/assets/images/bg.png" srcset="" style="margin: 30vh auto 0; display: flex; align-items: center" />
+  <ion-label class="global-label-large-bold" style="margin: 24px auto; display: block; text-align: center">TRADER EXPERT</ion-label>
+</ion-content>
