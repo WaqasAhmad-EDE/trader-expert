@@ -1,0 +1,7 @@
+{
+  "name": "trader-expert",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
