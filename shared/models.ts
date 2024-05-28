@@ -105,7 +105,7 @@ export interface Document<T> {
 }
 
 // The entity data with the identifier attached
-export type WithId<T> = T & { id: string }
+export type WithId<T> = T & { id: string } & any
 
 export type GenericOrder = WithId<ActiveOrder> & Partial<ClosedOrder> & { active: boolean }
 
