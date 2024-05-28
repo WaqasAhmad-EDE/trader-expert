@@ -7,11 +7,13 @@ import { IonicModule } from "@ionic/angular"
 import { ProfilePageRoutingModule } from "./profile-routing.module"
 
 import { ProfilePage } from "./profile.page"
-import { IgxFinancialChartCoreModule } from "igniteui-angular-charts"
+// import { IgxFinancialChartCoreModule } from " "
 import { EditProfilePageModule } from "./edit-profile/edit-profile.module"
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, ProfilePageRoutingModule, IgxFinancialChartCoreModule, EditProfilePageModule],
+  imports: [CommonModule, FormsModule, IonicModule, ProfilePageRoutingModule
+    // , IgxFinancialChartCoreModule
+    , EditProfilePageModule],
   declarations: [ProfilePage],
 })
 export class ProfilePageModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core"
-import { FinancialChartType, IgxFinancialChartComponent } from "igniteui-angular-charts"
+// import { FinancialChartType, IgxFinancialChartComponent } from "igniteui-angular-charts"
 import { of, Subscription } from "rxjs"
 import {
   Currency,
@@ -67,7 +67,7 @@ export class TradePage implements OnInit, ViewDidEnter {
 
   @ViewChild("openModalCurrencyPairs") currencyPairsModal
   @ViewChild("openModalInterval") intervalModal
-  @ViewChild("chart", { static: false }) chart: IgxFinancialChartComponent
+  // @ViewChild("chart", { static: false }) chart: IgxFinancialChartComponent
 
 
   // private webSocket: Socket;
@@ -110,7 +110,7 @@ export class TradePage implements OnInit, ViewDidEnter {
       }
     })
     Keyboard.addListener('keyboardDidShow', (res) => {
-      this.keyboardHeight = res.keyboardHeight.toString() + 'px'
+      this.keyboardHeight = res?.keyboardHeight.toString() + 'px'
     })
     Keyboard.addListener('keyboardDidHide', () => {
       this.keyboardHeight = '0'
@@ -466,19 +466,19 @@ export class TradePage implements OnInit, ViewDidEnter {
    * Prevents the chart from stealing touch events when scrolling the page.
    */
   private passThroughVerticalSwipeEvents() {
-    const element = this.chart._mainElement.nativeElement as Element
-    const children = element.querySelectorAll("canvas")
+    // const element = this.chart._mainElement.nativeElement as Element
+    // const children = element.querySelectorAll("canvas")
 
-    for (let i = 0; i < children.length; i++) {
-      if (children[i].style.touchAction != "none") {
-        continue
-      }
+    // for (let i = 0; i < children.length; i++) {
+    //   if (children[i].style.touchAction != "none") {
+    //     continue
+    //   }
 
-      children[i].addEventListener("touchend", () => {
-        children[i].style.touchAction = "pan-y"
-      })
-      break
-    }
+    //   children[i].addEventListener("touchend", () => {
+    //     children[i].style.touchAction = "pan-y"
+    //   })
+    //   break
+    // }
   }
 
   ionFocused(event) {

@@ -7,7 +7,7 @@ import { IonicModule } from "@ionic/angular"
 import { MarketPageRoutingModule } from "./market-routing.module"
 
 import { MarketPage } from "./market.page"
-import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-charts"
+// import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-charts"
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-chart
     FormsModule,
     IonicModule,
     MarketPageRoutingModule,
-    IgxFinancialChartModule,
-    IgxLegendModule,
+    // IgxFinancialChartModule,
+    // IgxLegendModule,
   ],
   declarations: [MarketPage],
 })

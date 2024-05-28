@@ -9,8 +9,8 @@ import { TradePageRoutingModule } from "./trade-routing.module"
 import { TradePage } from "./trade.page"
 import { ChartComponent } from "./chart/chart.component"
 import { HttpClientModule } from "@angular/common/http"
-import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-charts"
-import { IgxAvatarModule, IgxTooltipModule } from "igniteui-angular"
+// import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-charts"
+// import { IgxAvatarModule, IgxTooltipModule } from "igniteui-angular"
 
 @NgModule({
   imports: [
@@ -19,10 +19,10 @@ import { IgxAvatarModule, IgxTooltipModule } from "igniteui-angular"
     IonicModule,
     TradePageRoutingModule,
     HttpClientModule,
-    IgxFinancialChartModule,
-    IgxLegendModule,
-    IgxAvatarModule,
-    IgxTooltipModule,
+    // IgxFinancialChartModule,
+    // IgxLegendModule,
+    // IgxAvatarModule,
+    // IgxTooltipModule,
     HttpClientModule
   ],
   declarations: [TradePage, ChartComponent],

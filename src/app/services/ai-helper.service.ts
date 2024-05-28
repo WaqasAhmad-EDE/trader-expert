@@ -40,7 +40,7 @@ export class AiHelperService {
         const lastUpadted = on[0]?.timeStamp || 0;
         this.getMessagesFromFirebase(lastUpadted).then(async res => {
           const completeNotifications = await this.getMessagesCountFromFirebase()
-          const newNotifications = res.docs.map(f => f.data())
+          const newNotifications = res?.docs.map(f => f.data())
           this.unreads = newNotifications.length || 0
           if (lastUpadted == 0) {
             this.unreads = newNotifications.filter((f: any) => f?.timeStamp > parseInt(user?.metadata?.['lastLoginAt'])).length
@@ -105,14 +105,14 @@ export class AiHelperService {
     const listenser = this.store.collection('Notifications', ref => ref.where('timeStamp', '>', lastUpadted).orderBy('timeStamp', 'desc')).snapshotChanges().subscribe(res => {
       if (res.length) {
         const prev = parseInt(localStorage.getItem('unreads') as string) || 0
-        res.map(r => r.payload.doc.data()).forEach((element: any) => {
+        res?.map(r => r.payload.doc.data()).forEach((element: any) => {
           if (this.allNotifications.filter(f => f.timeStamp == element.timeStamp).length == 0) {
             this.allNotifications.unshift(element)
-            this.unreads = res.length + prev
+            this.unreads = res?.length + prev
             this.UpdateStatus.next(true)
           }
         })
-        // this.allNotifications = res.map(r => r.payload.doc.data()).concat(this.allNotifications);
+        // this.allNotifications = res?.map(r => r.payload.doc.data()).concat(this.allNotifications);
         localStorage.setItem('unreads', this.unreads.toString());
         localStorage.setItem('notifications', JSON.stringify(this.allNotifications))
         listenser.unsubscribe();

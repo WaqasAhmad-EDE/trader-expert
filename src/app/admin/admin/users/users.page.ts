@@ -26,7 +26,7 @@ export class UsersPage implements OnInit {
   apikeyicon = "key-outline"
   apiKey = ""
   segment = "user-list"
-  videoList = []
+  videoList:any[] = []
 
 
   constructor(
@@ -96,7 +96,7 @@ export class UsersPage implements OnInit {
 
   getVideoLinks() {
     this.fireStorage.ref('Videos').listAll().toPromise().then(res => {
-      res.items.map(f => {
+      res?.items.map(f => {
         f.getDownloadURL().then(link => {
           this.videoList.push(link)
         })
@@ -112,7 +112,7 @@ export class UsersPage implements OnInit {
       .toPromise()
       .then(res => {
         this.videoList = []
-        res.forEach(r => {
+        res?.forEach(r => {
           const rs = r.data() as any;
           rs['id'] = r.id;
           this.videoList.push(rs)
@@ -125,7 +125,7 @@ export class UsersPage implements OnInit {
 
 
 
-  selectedVideo: FileList
+  selectedVideo: FileList | null
   titleValue: string
   onChangeVideoSelect(event) {
     this.selectedVideo = event.target.files[0]
@@ -185,7 +185,7 @@ export class UsersPage implements OnInit {
       .toPromise()
       .then(res => {
         this.users = []
-        res.forEach(r => {
+        res?.forEach(r => {
           this.users.push(r.data())
         })
       })
@@ -201,17 +201,17 @@ export class UsersPage implements OnInit {
       .createUserWithEmailAndPassword(this.new_user_email, newuserpassword)
       .then(res => {
         void this.notificationService.showToastMessage("Creating user", "success")
-        res.user.updateProfile({ displayName: "New User", photoURL: "" })
+        res?.user.updateProfile({ displayName: "New User", photoURL: "" })
         this.fauth.sendPasswordResetEmail(res.user.email).then(() => { })
         this.fs
           .collection("users")
           .doc(res.user.uid.toString())
           .set({
-            uid: res.user.uid,
+            uid: res?.user.uid,
             displayName: "New User",
             photoURL: "",
             disabled: false,
-            email: res.user.email,
+            email: res?.user.email,
             balance: this.new_user_amount,
             created_at: new Date(Date.now()),
           })

@@ -12,7 +12,7 @@ import { HttpClientModule } from "@angular/common/http"
 import { AngularFireModule } from "@angular/fire/compat"
 import { AngularFireAuthModule } from "@angular/fire/compat/auth"
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore"
-import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-charts"
+// import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-charts"
 import { AngularFireMessagingModule } from "@angular/fire/compat/messaging"
 import { FirebaseOptions } from "@angular/fire/app"
 
@@ -34,8 +34,8 @@ const firebaseConfig: FirebaseOptions = {
     AngularFirestoreModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    IgxFinancialChartModule,
-    IgxLegendModule,
+    // IgxFinancialChartModule,
+    // IgxLegendModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

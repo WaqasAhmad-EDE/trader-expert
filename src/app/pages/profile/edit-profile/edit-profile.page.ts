@@ -83,7 +83,7 @@ export class EditProfilePage implements OnInit {
               this.photoURL = logoLink
               this.newDisplayImage = null
               this.fireAuth.user.subscribe(async res => {
-                await res.updateProfile({ photoURL: logoLink })
+                await res?.updateProfile({ photoURL: logoLink })
                 await this.firestore.collection("users").doc(this.uid).update({ photoURL: logoLink })
 
                 const toast = await new ToastController().create({

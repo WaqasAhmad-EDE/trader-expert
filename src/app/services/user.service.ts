@@ -103,7 +103,7 @@ export class UserService {
     const user = await this.getUser()
 
     if (user) {
-      const notificationTokens = user.notificationTokens.filter(x => x !== token)
+      const notificationTokens = user?.notificationTokens?.filter(x => x !== token)
       await this.store.collection(CollectionName.Users).doc(user.id).update({ notificationTokens })
     }
     await this.adminService.setFcmToken(undefined)

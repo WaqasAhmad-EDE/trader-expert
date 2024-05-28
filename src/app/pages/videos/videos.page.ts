@@ -24,7 +24,7 @@ export class VideosPage implements OnInit {
   
   getVideoLinks() {
     this.fireStorage.ref('Videos').listAll().toPromise().then(res => {
-      res.items.map(f => {
+      res?.items.map(f => {
         f.getDownloadURL().then(link => {
           this.videoList.push(link)
         })
@@ -40,7 +40,7 @@ export class VideosPage implements OnInit {
       .toPromise()
       .then(res => {
         this.videoList = []
-        res.forEach(r => {
+        res?.forEach(r => {
           this.videoList.push(r.data())
         })
       })
