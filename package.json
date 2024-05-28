@@ -2,6 +2,8 @@
   "name": "trader-expert",
   "version": "0.0.1",
   "author": "Ionic Framework",
+  "nodeVersion": "21.6.1",
+  "npmVersion": "10.2.4",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -17,6 +19,7 @@
     "@angular/common": "^17.0.2",
     "@angular/compiler": "^17.0.2",
     "@angular/core": "^17.0.2",
+    "@angular/fire": "^17.1.0",
     "@angular/forms": "^17.0.2",
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
